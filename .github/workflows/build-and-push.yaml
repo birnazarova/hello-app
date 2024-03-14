@@ -1,10 +1,8 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+  schedule: '0 18 * * *'
 
 env:
   PROJECT_ID: high-theme-384006
