@@ -14,14 +14,8 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Install hadolint
-      run: |
-        sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
-        sudo chmod +x /bin/hadolint
-
-    - name: Lint Dockerfile
-      run: |
-        lint_output=$(hadolint Dockerfile)
-        echo "$lint_output"
+    - uses: hadolint/hadolint-action@v3.1.0
+      with:
+        dockerfile: Dockerfile
