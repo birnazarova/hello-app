@@ -2,6 +2,10 @@ name: Dockerfile linter
 
 on:
   workflow_dispatch: #to manually trigger the workflow
+  push:
+    branch: [main]
+  pull_request:
+    branch: [main]
 
 jobs:
   hadolint:
@@ -14,7 +18,7 @@ jobs:
           dockerfile: Dockerfile
       - name: Update Pull Request
         uses: actions/github-script@v6
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         with:
           script: |
             const output = `
