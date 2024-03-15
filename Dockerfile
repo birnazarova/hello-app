@@ -5,7 +5,7 @@ FROM nginx:1.25.4
 # RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy the custom Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/
+COPY nginx.config /etc/nginx/conf.d/
 
 # Copy the static HTML file to the web server's root directory
 # COPY index.html /usr/share/nginx/html/
