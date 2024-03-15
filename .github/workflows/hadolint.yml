@@ -1,35 +1,26 @@
-name: Docker linter
+name: Dockerfile Lint
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  hadolint:
-    name: Run hadolint scanning
+  lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Run hadolint
-        uses: hadolint/hadolint-action@f988afea3da57ee48710a9795b6bb677cc901183
-        with:
-          dockerfile: ./Dockerfile
-          format: sarif
-          output-file: hadolint-results.sarif
-          no-fail: true
+    - name: Install hadolint
+      run: |
+        sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
+        sudo chmod +x /bin/hadolint
 
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: hadolint-results.sarif
-          wait-for-processing: true
+    - name: Lint Dockerfile
+      run: |
+        hadolint Dockerfile
