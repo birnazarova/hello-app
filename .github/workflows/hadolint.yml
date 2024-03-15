@@ -23,4 +23,5 @@ jobs:
 
     - name: Lint Dockerfile
       run: |
-        hadolint Dockerfile
+        lint_output=$(hadolint Dockerfile)
+        echo "$lint_output"
