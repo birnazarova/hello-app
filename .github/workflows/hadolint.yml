@@ -7,15 +7,13 @@ on:
   pull_request:
     branches:
       - main
-
+      
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
+  hadolint:
+    runs-on: ubuntu-22.04
+    name: Hadolint
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - uses: hadolint/hadolint-action@v3.1.0
-      with:
-        dockerfile: Dockerfile
+      - uses: actions/checkout@v4
+      - uses: jbergstroem/hadolint-gh-action@v1
+        with:
+          annotate: true
