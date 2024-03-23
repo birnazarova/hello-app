@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -21,15 +21,14 @@ jobs:
           aws-region: us-east-1
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build docker image
         run: docker build -t app-image:v1 .
 
       - name: Tag docker image
-        run: docker tag app-image:v1 XXX.dkr.ecr.us-east-1.amazonaws.com/my-app:v1
+        run: docker tag hello-app:v1 767364434252.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1
 
       - name: Push docker image to Amazon ECR
         run: |
-          docker push XXX.dkr.ecr.us-east-1.amazonaws.com/my-app:v1
+          docker push 767364434252.dkr.ecr.us-east-1.amazonaws.com/hello-app:v1
