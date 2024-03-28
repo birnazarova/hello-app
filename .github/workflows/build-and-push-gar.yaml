@@ -2,13 +2,12 @@ name: Build and Push to GAR
 
 on:
   workflow_dispatch:
-  schedule: '0 18 * * *'
 
 env:
-  PROJECT_ID: high-theme-384006
+  PROJECT_ID: proven-dryad-417822
   IMAGE_NAME: hello-app
   REGISTRY_LOCATION: us-central-1
-  REPOSITORY: hello-chart
+  REPOSITORY: hello-app
 
 jobs:
   build-and-push:
