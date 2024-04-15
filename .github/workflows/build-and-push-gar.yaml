@@ -6,7 +6,7 @@ on:
 env:
   PROJECT_ID: proven-dryad-417822
   IMAGE_NAME: hello-app
-  REGISTRY_LOCATION: us-central-1
+  REGISTRY_LOCATION: us-central1
   REPOSITORY: hello-app
 
 jobs:
