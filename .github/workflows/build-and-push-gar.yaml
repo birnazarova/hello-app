@@ -6,7 +6,7 @@ on:
 env:
   PROJECT_ID: proven-dryad-417822
   IMAGE_NAME: hello-app
-  REGISTRY_LOCATION: us-central-1
+  REGISTRY_LOCATION: us-central1
   REPOSITORY: hello-app
 
 jobs:
@@ -40,14 +40,14 @@ jobs:
 
       - name: Build and tag Docker image
         run: |
-          docker build -t "${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:${{ github.sha }} .
+          docker build -t "${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
       - name: Push Docker image to Artifact Registry
         run: |
-          docker push "${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          docker push "${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
 
       - name: Set Docker image URL as an output
         id: docker-image-url
         run: |
-          echo ::set-output name=docker_image_url::${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          echo ::set-output name=docker_image_url::${{ env.REGISTRY_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
